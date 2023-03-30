@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 
@@ -6,18 +7,17 @@ import { Observable, Subject } from 'rxjs';
   providedIn: 'root',
 })
 export class GetUserService {
-  constructor() {}
+  constructor(private http: HttpClient) {}
 
-  getUser(): Observable<any> {
+  private userSubject = new Subject<any>();
+  user$ = this.userSubject.asObservable();
 
-    const userSubject = new Subject<any>();
-  
-    //@ts-ignore
-    window.otpless = (otplessUser) => {
-      userSubject.next(otplessUser);
-      userSubject.complete();
-    };
-  
-    return userSubject.asObservable();
+  setUser(user: any) {
+    this.userSubject.next(user);
+    this.userSubject.complete();
+  }
+
+  getUser(userNumber: string | undefined): Observable<any> {
+    return this.http.get(" http://localhost:3000/users?number=" + userNumber);
   }
 }

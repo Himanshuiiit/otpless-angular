@@ -1,0 +1,14 @@
+{
+    "users": [
+      { "id":1,
+        "number": "918789390670",
+        "name": "Himanshu Verma",
+        "email": "hims6482@gmial.com"
+     },
+      { "id":2,
+        "number": "919876543210",
+        "name": "Himanshu Verma",
+        "email": "lol@gmail.com"
+      }
+    ]
+  }

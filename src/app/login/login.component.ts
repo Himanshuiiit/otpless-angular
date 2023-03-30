@@ -13,13 +13,11 @@ export class LoginComponent implements OnInit {
   constructor(private getUserservice: GetUserService, private router : Router) {}
 
   ngOnInit() {
-    this.getUserservice.getUser().subscribe((user) => {
-      this.user = user;
-      if(this.user!=undefined){
-        this.router.navigate(['/home']);
-      }
-      console.log('this.user', this.user);
-    });
+    //@ts-ignore
+    window.otpless = (otplessUser) => {
+      this.getUserservice.setUser(otplessUser);
+      this.router.navigate(['/home'], { queryParams: { userNumber: otplessUser.waNumber } });
+    };
   }
 
 }
